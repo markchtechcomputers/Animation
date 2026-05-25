@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Video Generator - Create Banana Clips & YouTube Intros</title>
+    <title>REAL AI Video Generator - Working Download</title>
     <style>
         * {
             margin: 0;
@@ -12,44 +12,48 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Header */
         .header {
             text-align: center;
             color: white;
-            margin-bottom: 40px;
-            padding: 20px;
+            margin-bottom: 30px;
         }
 
         .header h1 {
-            font-size: 3.5em;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
 
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
+        .api-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        /* Main Grid */
+        .api-input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: none;
+            margin: 10px;
+        }
+
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 20px;
         }
 
         @media (max-width: 768px) {
@@ -58,130 +62,64 @@
             }
         }
 
-        /* Cards */
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            backdrop-filter: blur(10px);
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .card h2 {
             margin-bottom: 20px;
             color: #333;
-            font-size: 1.8em;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-            display: inline-block;
         }
 
-        /* Form Elements */
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #333;
-            font-size: 1em;
+            color: #555;
         }
 
-        textarea, select, input {
+        textarea, select {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
             font-size: 1em;
-            transition: all 0.3s;
-            font-family: inherit;
-        }
-
-        textarea:focus, select:focus, input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
         }
 
         textarea {
-            min-height: 120px;
+            min-height: 100px;
             resize: vertical;
         }
 
-        /* Style Presets */
-        .style-presets {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .style-btn {
-            background: #f0f0f0;
-            border: 2px solid transparent;
-            padding: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s;
-            font-size: 0.9em;
-        }
-
-        .style-btn:hover {
-            background: #e0e0e0;
-            transform: translateY(-2px);
-        }
-
-        .style-btn.selected {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        /* Generate Button */
-        .generate-btn {
+        button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 12px;
+            padding: 12px 24px;
+            border-radius: 8px;
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: all 0.3s;
-            margin-top: 10px;
         }
 
-        .generate-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
-        }
-
-        .generate-btn:disabled {
-            opacity: 0.6;
+        button:disabled {
+            opacity: 0.5;
             cursor: not-allowed;
-        }
-
-        /* Video Gallery */
-        .video-gallery {
-            max-height: 600px;
-            overflow-y: auto;
-            padding-right: 10px;
         }
 
         .video-item {
             background: #f8f9fa;
-            border-radius: 15px;
+            border-radius: 10px;
             padding: 15px;
-            margin-bottom: 20px;
-            transition: transform 0.2s;
-        }
-
-        .video-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
         }
 
         .video-wrapper {
@@ -189,7 +127,7 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            border-radius: 12px;
+            border-radius: 8px;
             background: #000;
         }
 
@@ -199,71 +137,38 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
         }
 
         .video-info {
-            margin-top: 12px;
-        }
-
-        .video-prompt {
-            font-size: 0.85em;
-            color: #666;
-            margin-bottom: 10px;
-            padding: 8px;
-            background: white;
-            border-radius: 8px;
-            word-wrap: break-word;
+            margin-top: 10px;
         }
 
         .download-btn {
             background: #28a745;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            transition: background 0.2s;
+            margin-top: 10px;
         }
 
-        .download-btn:hover {
-            background: #218838;
-        }
-
-        .delete-btn {
-            background: #dc3545;
-            margin-top: 5px;
-        }
-
-        .delete-btn:hover {
-            background: #c82333;
-        }
-
-        /* Loading Animation */
-        .loading-overlay {
+        .loading {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: rgba(0,0,0,0.9);
-            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             flex-direction: column;
         }
 
-        .loading-spinner {
-            width: 80px;
-            height: 80px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
         }
 
         @keyframes spin {
@@ -271,442 +176,221 @@
             100% { transform: rotate(360deg); }
         }
 
-        .loading-text {
-            color: white;
-            font-size: 1.2em;
-            margin-top: 10px;
-        }
-
-        .progress-bar {
-            width: 300px;
-            height: 6px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 3px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            width: 0%;
-            transition: width 0.3s;
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Alert */
         .alert {
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
             display: none;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
         }
 
         .alert.success {
             background: #d4edda;
             color: #155724;
-            border: 1px solid #c3e6cb;
             display: block;
         }
 
         .alert.error {
             background: #f8d7da;
             color: #721c24;
-            border: 1px solid #f5c6cb;
             display: block;
-        }
-
-        .alert.info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-            display: block;
-        }
-
-        /* Templates */
-        .templates {
-            display: grid;
-            gap: 10px;
-            margin-top: 10px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .template-btn {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.2s;
-        }
-
-        .template-btn:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
-        }
-
-        .template-title {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .template-desc {
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 3px;
-        }
-
-        /* Scrollbar */
-        .video-gallery::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .video-gallery::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .video-gallery::-webkit-scrollbar-thumb {
-            background: #667eea;
-            border-radius: 10px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            font-weight: 600;
-            margin-left: 8px;
-        }
-
-        .badge.demo {
-            background: #ff9800;
-            color: white;
-        }
-
-        .badge.real {
-            background: #4caf50;
-            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎬 AI Video Studio Pro</h1>
-            <p>Create professional banana clip animations, YouTube intros & music videos</p>
+            <h1>🎬 REAL AI Video Generator</h1>
+            <p>Create & Download Banana Clips, YouTube Intros, Music Videos</p>
+        </div>
+
+        <div class="api-section">
+            <h3 style="color: white;">🔑 Enter Your Replicate API Key (Free)</h3>
+            <p style="color: white; font-size: 0.9em;">Get it from: <a href="https://replicate.com/account" target="_blank" style="color: #ffd700;">https://replicate.com/account</a></p>
+            <input type="password" id="apiKey" class="api-input" placeholder="Enter your API key here..." style="width: 400px;">
+            <button onclick="saveApiKey()" style="width: auto; padding: 10px 20px;">Save Key</button>
         </div>
 
         <div class="main-grid">
-            <!-- Left Panel - Generator -->
             <div class="card">
                 <h2>✨ Create Video</h2>
-                
                 <div id="alert"></div>
-
+                
                 <div class="form-group">
-                    <label>🎨 Prompt Description</label>
-                    <textarea id="prompt" placeholder="Describe the video you want to create...&#10;&#10;Examples:&#10;• A dancing banana wearing sunglasses, breakdancing, colorful party background&#10;• Epic YouTube intro with glowing text and dynamic camera movement&#10;• Music video intro with pulsing neon lights and bass drops"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>🎭 Style Enhancement</label>
-                    <div class="style-presets">
-                        <div class="style-btn" data-style="anime">🎨 Anime</div>
-                        <div class="style-btn" data-style="cinematic">🎬 Cinematic</div>
-                        <div class="style-btn" data-style="3d cartoon">🎮 3D Cartoon</div>
-                        <div class="style-btn" data-style="pixel art">👾 Pixel Art</div>
-                        <div class="style-btn" data-style="realistic">📷 Realistic</div>
-                    </div>
+                    <label>🎨 Prompt</label>
+                    <textarea id="prompt" placeholder="Example: A cute banana character dancing, wearing sunglasses, hip-hop style, neon background, 3D animation"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label>⏱️ Duration</label>
                     <select id="duration">
-                        <option value="3">3 seconds - Quick clip</option>
-                        <option value="5" selected>5 seconds - Standard</option>
-                        <option value="8">8 seconds - Extended</option>
-                        <option value="10">10 seconds - Long</option>
+                        <option value="3">3 seconds</option>
+                        <option value="5" selected>5 seconds</option>
+                        <option value="8">8 seconds</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label>📐 Aspect Ratio</label>
-                    <select id="aspect">
-                        <option value="16:9">16:9 - YouTube (Landscape)</option>
-                        <option value="9:16">9:16 - TikTok/Reels (Portrait)</option>
-                        <option value="1:1">1:1 - Instagram Square</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>📝 Quick Templates</label>
-                    <div class="templates">
-                        <div class="template-btn" data-prompt="A cute banana character dancing happily, wearing sunglasses and a gold chain, hip-hop style, vibrant neon background, smooth animation">
-                            <div class="template-title">🍌 Banana Dance Clip</div>
-                            <div class="template-desc">Fun banana character dancing - perfect for YouTube shorts</div>
-                        </div>
-                        <div class="template-btn" data-prompt="Epic YouTube intro with glowing neon text 'WELCOME', dynamic camera movement, cinematic lighting, energy particles, professional quality">
-                            <div class="template-title">🎥 YouTube Channel Intro</div>
-                            <div class="template-desc">Professional channel intro animation</div>
-                        </div>
-                        <div class="template-btn" data-prompt="Music video intro, pulsing neon rings, bass drop animation, purple and cyan colors, EDM style, abstract geometric shapes">
-                            <div class="template-title">🎵 EDM Music Intro</div>
-                            <div class="template-desc">Electronic music video opener</div>
-                        </div>
-                        <div class="template-btn" data-prompt="A banana slipping on a banana peel, funny cartoon style, white background, loop animation, exaggerated expressions">
-                            <div class="template-title">😂 Banana Slip Comedy</div>
-                            <div class="template-desc">Funny loop animation for memes</div>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="generate-btn" onclick="generateVideo()">🚀 Generate Video</button>
+                <button onclick="generateVideo()">🚀 Generate Real AI Video</button>
             </div>
 
-            <!-- Right Panel - Video Gallery -->
             <div class="card">
-                <h2>📀 Your Videos <span id="videoCount" style="font-size: 0.6em;"></span></h2>
-                <div id="videoGallery" class="video-gallery">
-                    <div style="text-align: center; color: #999; padding: 40px;">
-                        No videos yet. Generate your first video above!
-                    </div>
+                <h2>📀 Your Videos <span id="count"></span></h2>
+                <div id="gallery" style="max-height: 500px; overflow-y: auto;">
+                    <div style="text-align: center; color: #999; padding: 40px;">No videos yet. Generate your first video!</div>
                 </div>
-                <button onclick="clearAllVideos()" style="margin-top: 15px; background: #dc3545; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; width: 100%;">
-                    🗑️ Clear All Videos
-                </button>
+                <button onclick="clearAll()" style="background: #dc3545; margin-top: 15px;">🗑️ Clear All</button>
             </div>
         </div>
     </div>
 
-    <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="loading-overlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">🎬 AI is creating your masterpiece...</div>
-        <div class="loading-text" style="font-size: 0.9em; margin-top: 10px;">This takes 15-30 seconds</div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <h3 style="color: white; margin-top: 20px;">🤖 AI is generating your video...</h3>
+        <p style="color: white;">This takes 20-40 seconds</p>
     </div>
 
     <script>
-        // Store videos in localStorage
         let videos = [];
-        let selectedStyle = '';
 
-        // Load videos on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadVideos();
-            
-            // Style preset handlers
-            document.querySelectorAll('.style-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    selectedStyle = btn.dataset.style;
-                    showAlert('info', `${selectedStyle} style applied!`, 1500);
-                });
-            });
-            
-            // Template handlers
-            document.querySelectorAll('.template-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const prompt = btn.dataset.prompt;
-                    document.getElementById('prompt').value = prompt;
-                    showAlert('success', 'Template loaded! Customize and generate.', 2000);
-                });
-            });
-        });
+        function saveApiKey() {
+            const key = document.getElementById('apiKey').value;
+            if (key) {
+                localStorage.setItem('replicate_api_key', key);
+                showAlert('success', 'API Key saved! You can now generate videos.');
+            }
+        }
+
+        function loadApiKey() {
+            const key = localStorage.getItem('replicate_api_key');
+            if (key) {
+                document.getElementById('apiKey').value = key;
+            }
+        }
 
         async function generateVideo() {
-            let prompt = document.getElementById('prompt').value.trim();
-            const duration = document.getElementById('duration').value;
-            const aspect = document.getElementById('aspect').value;
-            
-            if (!prompt) {
-                showAlert('error', 'Please enter a prompt description');
+            const apiKey = localStorage.getItem('replicate_api_key');
+            if (!apiKey) {
+                showAlert('error', 'Please enter your Replicate API key first!');
                 return;
             }
-            
-            // Add style to prompt
-            if (selectedStyle) {
-                prompt = `${prompt}, ${selectedStyle} style, high quality, detailed`;
+
+            const prompt = document.getElementById('prompt').value.trim();
+            if (!prompt) {
+                showAlert('error', 'Please enter a prompt');
+                return;
             }
-            
-            // Show loading with progress animation
-            document.getElementById('loadingOverlay').style.display = 'flex';
-            animateProgress();
+
+            document.getElementById('loading').style.display = 'flex';
             
             try {
-                // Generate video using our API
-                const videoUrl = await generateVideoWithAI(prompt, duration, aspect);
+                // Use Replicate's stable-video-diffusion model (free tier available)
+                const videoUrl = await generateWithReplicate(apiKey, prompt);
                 
-                // Save to gallery
                 const videoData = {
                     id: Date.now(),
                     prompt: prompt,
                     url: videoUrl,
-                    timestamp: new Date().toLocaleString(),
-                    duration: duration,
-                    aspect: aspect
+                    timestamp: new Date().toLocaleString()
                 };
                 
                 videos.unshift(videoData);
-                if (videos.length > 20) videos.pop();
-                saveVideos();
+                localStorage.setItem('my_videos', JSON.stringify(videos));
                 renderGallery();
-                
-                showAlert('success', '✅ Video generated successfully! Click download to save it.', 3000);
+                showAlert('success', 'Video generated successfully! Click download to save.');
                 
             } catch (error) {
-                console.error('Generation error:', error);
-                showAlert('error', `Failed to generate video: ${error.message}. Please try again.`, 5000);
+                console.error('Error:', error);
+                showAlert('error', 'Failed to generate video. Check your API key and try again.');
             } finally {
-                document.getElementById('loadingOverlay').style.display = 'none';
+                document.getElementById('loading').style.display = 'none';
             }
         }
-        
-        async function generateVideoWithAI(prompt, duration, aspect) {
-            // Professional AI video generation using multiple free APIs
-            // This works immediately without API keys
-            
-            return new Promise(async (resolve, reject) => {
-                try {
-                    // Method 1: Try to use a free video generation API
-                    // Using Luma Labs free API (no key required for demo)
-                    const encodedPrompt = encodeURIComponent(prompt);
-                    
-                    // For now, we'll use high-quality stock videos based on prompt keywords
-                    // This ensures you always get a downloadable video
-                    
-                    const videoLibrary = {
-                        'banana': 'https://cdn.pixabay.com/video/2023/07/15/173360-845239686_large.mp4',
-                        'dance': 'https://cdn.pixabay.com/video/2020/07/06/44580-440320183_large.mp4',
-                        'intro': 'https://cdn.pixabay.com/video/2022/03/01/110104-686569353_large.mp4',
-                        'music': 'https://cdn.pixabay.com/video/2021/11/30/100799-647481401_large.mp4',
-                        'neon': 'https://cdn.pixabay.com/video/2023/01/12/146946-787443139_large.mp4',
-                        'default': 'https://cdn.pixabay.com/video/2019/06/26/24507-340640244_large.mp4'
-                    };
-                    
-                    let selectedVideo = videoLibrary.default;
-                    const lowerPrompt = prompt.toLowerCase();
-                    
-                    if (lowerPrompt.includes('banana') || lowerPrompt.includes('fruit')) {
-                        selectedVideo = videoLibrary.banana;
-                    } else if (lowerPrompt.includes('dance') || lowerPrompt.includes('danc')) {
-                        selectedVideo = videoLibrary.dance;
-                    } else if (lowerPrompt.includes('intro') || lowerPrompt.includes('youtube') || lowerPrompt.includes('channel')) {
-                        selectedVideo = videoLibrary.intro;
-                    } else if (lowerPrompt.includes('music') || lowerPrompt.includes('edm') || lowerPrompt.includes('beat')) {
-                        selectedVideo = videoLibrary.music;
-                    } else if (lowerPrompt.includes('neon') || lowerPrompt.includes('light') || lowerPrompt.includes('glow')) {
-                        selectedVideo = videoLibrary.neon;
+
+        async function generateWithReplicate(apiKey, prompt) {
+            // Using Replicate's API for real video generation
+            const response = await fetch('https://api.replicate.com/v1/predictions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Token ${apiKey}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    version: "db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf",
+                    input: {
+                        prompt: prompt,
+                        num_frames: 25,
+                        fps: 8,
+                        guidance_scale: 7,
+                        num_inference_steps: 25
                     }
-                    
-                    // Simulate processing time
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    
-                    resolve(selectedVideo);
-                    
-                } catch (error) {
-                    // Fallback: Create a canvas animation
-                    const fallbackVideo = await createCanvasAnimation(prompt);
-                    resolve(fallbackVideo);
-                }
+                })
             });
+
+            if (!response.ok) {
+                throw new Error('API request failed');
+            }
+
+            const prediction = await response.json();
+            const result = await pollForResult(prediction.urls.get);
+            
+            return result.output;
         }
-        
-        function animateProgress() {
-            const progressFill = document.getElementById('progressFill');
-            let width = 0;
-            const interval = setInterval(() => {
-                if (width >= 100) {
-                    clearInterval(interval);
-                } else {
-                    width += 2;
-                    progressFill.style.width = width + '%';
+
+        async function pollForResult(url) {
+            for (let i = 0; i < 60; i++) { // Poll for up to 2 minutes
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.status === 'succeeded') {
+                    return data;
+                } else if (data.status === 'failed') {
+                    throw new Error('Generation failed');
                 }
-            }, 200);
+            }
+            throw new Error('Timeout');
         }
-        
-        function saveVideos() {
-            localStorage.setItem('ai_videos_pro', JSON.stringify(videos));
-        }
-        
-        function loadVideos() {
-            const saved = localStorage.getItem('ai_videos_pro');
+
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            const countSpan = document.getElementById('count');
+            
+            const saved = localStorage.getItem('my_videos');
             if (saved) {
                 videos = JSON.parse(saved);
             }
-            renderGallery();
-        }
-        
-        function renderGallery() {
-            const gallery = document.getElementById('videoGallery');
-            const videoCount = document.getElementById('videoCount');
             
             if (!videos || videos.length === 0) {
-                gallery.innerHTML = '<div style="text-align: center; color: #999; padding: 40px;">No videos yet. Generate your first video above!</div>';
-                videoCount.textContent = '';
+                gallery.innerHTML = '<div style="text-align: center; color: #999; padding: 40px;">No videos yet. Generate your first video!</div>';
+                countSpan.textContent = '';
                 return;
             }
             
-            videoCount.textContent = `(${videos.length})`;
+            countSpan.textContent = `(${videos.length})`;
             
             gallery.innerHTML = videos.map(video => `
                 <div class="video-item">
                     <div class="video-wrapper">
-                        <video controls preload="metadata">
+                        <video controls>
                             <source src="${video.url}" type="video/mp4">
-                            Your browser does not support video playback.
                         </video>
                     </div>
                     <div class="video-info">
-                        <div class="video-prompt">
-                            <strong>📅 ${video.timestamp}</strong><br>
-                            ${escapeHtml(video.prompt.substring(0, 120))}${video.prompt.length > 120 ? '...' : ''}
-                            <span class="badge demo">Demo</span>
-                        </div>
+                        <small>${video.timestamp}</small>
+                        <p style="font-size: 0.85em; color: #666; margin: 8px 0;">${video.prompt.substring(0, 100)}...</p>
                         <button class="download-btn" onclick="downloadVideo('${video.url}', ${video.id})">
-                            💾 Download Video (MP4)
-                        </button>
-                        <button class="download-btn delete-btn" onclick="deleteVideo(${video.id})">
-                            🗑️ Delete
+                            💾 Download MP4
                         </button>
                     </div>
                 </div>
             `).join('');
         }
-        
+
         async function downloadVideo(url, id) {
             try {
-                showAlert('info', 'Starting download...', 2000);
-                
-                // Method 1: Fetch and download
+                showAlert('success', 'Downloading...', 2000);
                 const response = await fetch(url);
                 const blob = await response.blob();
                 const blobUrl = URL.createObjectURL(blob);
-                
                 const a = document.createElement('a');
                 a.href = blobUrl;
                 a.download = `ai_video_${id}.mp4`;
@@ -714,53 +398,33 @@
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(blobUrl);
-                
-                showAlert('success', 'Download started! Check your downloads folder.', 3000);
             } catch (error) {
-                // Method 2: Open in new tab
                 window.open(url, '_blank');
                 showAlert('success', 'Video opened in new tab. Right-click to save.', 3000);
             }
         }
-        
-        function deleteVideo(id) {
-            videos = videos.filter(v => v.id !== id);
-            saveVideos();
-            renderGallery();
-            showAlert('success', 'Video deleted', 2000);
-        }
-        
-        function clearAllVideos() {
-            if (confirm('Delete all videos? This cannot be undone.')) {
+
+        function clearAll() {
+            if (confirm('Delete all videos?')) {
                 videos = [];
-                saveVideos();
+                localStorage.setItem('my_videos', JSON.stringify(videos));
                 renderGallery();
-                showAlert('success', 'All videos cleared', 2000);
+                showAlert('success', 'All videos cleared');
             }
         }
-        
-        function showAlert(type, message, duration) {
+
+        function showAlert(type, message) {
             const alertDiv = document.getElementById('alert');
             alertDiv.className = `alert ${type}`;
             alertDiv.innerHTML = message;
-            
             setTimeout(() => {
                 alertDiv.className = 'alert';
-            }, duration);
+            }, 4000);
         }
-        
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-        
-        // Keyboard shortcut: Ctrl/Cmd + Enter to generate
-        document.getElementById('prompt').addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                generateVideo();
-            }
-        });
+
+        // Load saved videos and API key on page load
+        loadApiKey();
+        renderGallery();
     </script>
 </body>
 </html>
