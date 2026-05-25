@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Video Generator - Banana Clips & Intros</title>
+    <title>AI Video Studio - MiniMax Professional Video Generation</title>
     <style>
         * {
             margin: 0;
@@ -12,21 +12,22 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
         }
 
+        /* Header */
         .header {
             text-align: center;
             color: white;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .header h1 {
@@ -40,14 +41,34 @@
             opacity: 0.9;
         }
 
+        /* Main Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cards */
         .card {
-            background: rgba(255,255,255,0.95);
+            background: white;
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
         }
 
+        .card h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.5em;
+        }
+
+        /* Form Elements */
         .form-group {
             margin-bottom: 20px;
         }
@@ -56,24 +77,21 @@
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #333;
-            font-size: 1.1em;
+            color: #555;
         }
 
         textarea, select, input {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #e1e5e9;
             border-radius: 10px;
             font-size: 1em;
             transition: all 0.3s;
-            font-family: inherit;
         }
 
         textarea:focus, select:focus, input:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
         }
 
         textarea {
@@ -81,78 +99,123 @@
             resize: vertical;
         }
 
-        button {
+        /* Mode Buttons */
+        .mode-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            padding: 10px;
+            background: #f0f0f0;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Generate Button */
+        .generate-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 14px 30px;
+            padding: 15px;
             border-radius: 10px;
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s;
         }
 
-        button:hover:not(:disabled) {
+        .generate-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        button:disabled {
+        .generate-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
 
-        .examples {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .examples h4 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .example-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .example-btn {
-            background: #e0e0e0;
-            color: #333;
-            padding: 8px 15px;
-            font-size: 0.9em;
-            width: auto;
-            flex: 0 0 auto;
-        }
-
-        .example-btn:hover {
-            background: #d0d0d0;
-            transform: translateY(-1px);
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
+        /* Video Gallery */
+        .video-item {
             background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
             border-radius: 10px;
-            margin-top: 20px;
+            background: #000;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            margin-top: 15px;
+        }
+
+        .video-prompt {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .download-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        /* Loading */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
         }
 
         .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
         }
 
         @keyframes spin {
@@ -160,342 +223,357 @@
             100% { transform: rotate(360deg); }
         }
 
-        .result {
+        .loading-text {
+            color: white;
             margin-top: 20px;
-            padding: 20px;
+            font-size: 1.2em;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 15px;
             border-radius: 10px;
+            margin-bottom: 20px;
             display: none;
         }
 
-        .result.success {
+        .alert.success {
             background: #d4edda;
-            border: 2px solid #c3e6cb;
+            color: #155724;
+            border: 1px solid #c3e6cb;
             display: block;
         }
 
-        .result.error {
+        .alert.error {
             background: #f8d7da;
-            border: 2px solid #f5c6cb;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
             display: block;
         }
 
-        .video-preview {
-            margin-top: 20px;
-            text-align: center;
+        /* Templates */
+        .template-grid {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        video {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        .template-item {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .info-box {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
+        .template-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
         }
 
-        .info-box h4 {
-            color: #1976d2;
-            margin-bottom: 10px;
+        .template-title {
+            font-weight: 600;
+            color: #333;
         }
 
-        .info-box code {
-            background: #fff;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-
-        @media (max-width: 600px) {
-            .card {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
+        .template-desc {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎬 AI Video Generator</h1>
-            <p>Create Banana Clip Animations & YouTube Intros</p>
+            <h1>🎬 AI Video Studio Pro</h1>
+            <p>Powered by MiniMax Hailuo-2.3 | Professional Video Generation</p>
         </div>
 
-        <div class="card">
-            <div class="form-group">
-                <label>🎨 Your Prompt</label>
-                <textarea id="prompt" placeholder="Example: A dancing banana wearing sunglasses and a gold chain, bouncing to music, cartoon style, vibrant colors"></textarea>
-            </div>
+        <div class="main-grid">
+            <!-- Left Panel -->
+            <div class="card">
+                <h2>✨ Create New Video</h2>
+                
+                <div id="alert"></div>
 
-            <div class="form-group">
-                <label>⏱️ Duration (seconds)</label>
-                <select id="duration">
-                    <option value="6">6 seconds (Quick clip)</option>
-                    <option value="10">10 seconds (Standard)</option>
-                    <option value="15">15 seconds (Longer)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>📺 Resolution</label>
-                <select id="resolution">
-                    <option value="720P">720P (Good quality)</option>
-                    <option value="1080P" selected>1080P (HD)</option>
-                </select>
-            </div>
-
-            <button id="generateBtn" onclick="generateVideo()">🚀 Generate Video</button>
-
-            <div class="examples">
-                <h4>✨ Quick Examples (click to use):</h4>
-                <div class="example-buttons">
-                    <button class="example-btn" onclick="setPrompt('A banana slipping on a banana peel, loop animation, funny cartoon style, white background')">🍌 Banana slip</button>
-                    <button class="example-btn" onclick="setPrompt('Epic YouTube intro with neon glowing text "WELCOME", dynamic camera movement, energetic music vibe')">🎥 YouTube intro</button>
-                    <button class="example-btn" onclick="setPrompt('Music video intro: abstract neon shapes, bass drop animation, purple and cyan colors, EDM style')">🎵 Music intro</button>
-                    <button class="example-btn" onclick="setPrompt('A cute banana character dancing, TikTok style, sunglasses and hat, loop animation')">🕺 Dancing banana</button>
-                    <button class="example-btn" onclick="setPrompt('Cinematic movie intro with particles, dramatic lighting, text "COMING SOON" fading in')">🍿 Movie intro</button>
+                <div class="form-group">
+                    <label>🎨 Generation Mode</label>
+                    <div class="mode-buttons">
+                        <div class="mode-btn active" data-mode="text_to_video">Text to Video</div>
+                        <div class="mode-btn" data-mode="image_to_video">Image to Video</div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>🎬 Generating your video... This takes 30-60 seconds</p>
-            <small style="color: #666;">The AI is creating your animation frame by frame</small>
-        </div>
+                <div class="form-group" id="prompt_group">
+                    <label>📝 Prompt Description</label>
+                    <textarea id="prompt" placeholder="Describe your video in detail...&#10;&#10;Example: A cute banana character dancing happily, wearing sunglasses, hip-hop style, neon background"></textarea>
+                </div>
 
-        <div id="result"></div>
+                <div class="form-group" id="image_group" style="display: none;">
+                    <label>🖼️ Image URL (First Frame)</label>
+                    <input type="text" id="image_url" placeholder="https://example.com/image.jpg">
+                </div>
 
-        <div class="info-box">
-            <h4>📌 How to get REAL AI-generated videos:</h4>
-            <p>This demo shows the interface. To generate real videos with MiniMax API:</p>
-            <ol style="margin-left: 20px; margin-top: 10px;">
-                <li>Sign up at <a href="https://console.minimax.com" target="_blank">MiniMax Console</a> and get your API token</li>
-                <li>Run a simple backend (I'll provide the code below)</li>
-                <li>Use your token in the backend to call the real API</li>
-                <li>Videos will be generated with the MiniMax-Hailuo-2.3 model</li>
-            </ol>
-        </div>
+                <div class="form-group">
+                    <label>⏱️ Duration (seconds)</label>
+                    <select id="duration">
+                        <option value="6">6 seconds</option>
+                        <option value="10">10 seconds</option>
+                    </select>
+                </div>
 
-        <div class="info-box" style="background: #fff3e0; border-left-color: #ff9800;">
-            <h4>🎯 Banana Clip Style Prompts (for best results):</h4>
-            <p><strong>Simple actions:</strong> "a banana dancing", "banana peeling itself", "banana slipping"</p>
-            <p><strong>With accessories:</strong> "banana wearing sunglasses and gold chain, hip hop style"</p>
-            <p><strong>YouTube intros:</strong> "dynamic YouTube intro with animated text, energetic transitions"</p>
-            <p><strong>Music intros:</strong> "music video intro with pulsing neon circles, EDM vibe, bass drop animation"</p>
-        </div>
-    </div>
+                <div class="form-group">
+                    <label>📐 Resolution</label>
+                    <select id="resolution">
+                        <option value="720P">720P</option>
+                        <option value="1080P" selected>1080P</option>
+                    </select>
+                </div>
 
-    <script>
-        // Sample video URLs for demo (these are placeholder animations)
-        // In production with real API, these would be replaced with actual generated videos
-        const DEMO_VIDEOS = {
-            default: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-            banana: "https://cdn.pixabay.com/video/2023/06/27/168953-840344447_large.mp4",
-            intro: "https://cdn.pixabay.com/video/2022/03/01/110104-686569353_large.mp4"
-        };
-
-        let isGenerating = false;
-
-        function setPrompt(text) {
-            document.getElementById('prompt').value = text;
-        }
-
-        async function generateVideo() {
-            if (isGenerating) return;
-            
-            const prompt = document.getElementById('prompt').value.trim();
-            const duration = document.getElementById('duration').value;
-            const resolution = document.getElementById('resolution').value;
-
-            if (!prompt) {
-                showResult('error', '❌ Please enter a prompt description for your video');
-                return;
-            }
-
-            // Show loading
-            isGenerating = true;
-            const generateBtn = document.getElementById('generateBtn');
-            generateBtn.disabled = true;
-            generateBtn.textContent = '⏳ Generating...';
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('result').innerHTML = '';
-
-            // Simulate API call with realistic delay
-            try {
-                // This simulates the actual API call - replace with real API when backend is ready
-                const videoUrl = await simulateAPICall(prompt, duration, resolution);
-                
-                // Show success with video player
-                showVideoResult(videoUrl, prompt);
-                
-            } catch (error) {
-                console.error('Error:', error);
-                showResult('error', `❌ Failed to generate video: ${error.message}<br><br>💡 Tip: For real videos, set up the backend as shown below. This demo is using preview animations.`);
-            } finally {
-                isGenerating = false;
-                generateBtn.disabled = false;
-                generateBtn.textContent = '🚀 Generate Video';
-                document.getElementById('loading').style.display = 'none';
-            }
-        }
-
-        // Simulate API call - REPLACE THIS with real API when backend is ready
-        async function simulateAPICall(prompt, duration, resolution) {
-            return new Promise((resolve, reject) => {
-                // Simulate network delay (30-60 seconds like real AI generation)
-                const delay = 3000; // 3 seconds for demo (real API takes 30-60 sec)
-                
-                setTimeout(() => {
-                    // For demo, return sample video based on prompt keywords
-                    let videoUrl = DEMO_VIDEOS.default;
-                    
-                    if (prompt.toLowerCase().includes('banana') || prompt.toLowerCase().includes('danc')) {
-                        videoUrl = DEMO_VIDEOS.banana;
-                    } else if (prompt.toLowerCase().includes('intro') || prompt.toLowerCase().includes('youtube') || prompt.toLowerCase().includes('music')) {
-                        videoUrl = DEMO_VIDEOS.intro;
-                    }
-                    
-                    // Add query params to prevent caching
-                    videoUrl += `?t=${Date.now()}`;
-                    
-                    resolve(videoUrl);
-                }, delay);
-            });
-        }
-
-        // REAL API integration code (uncomment when you have backend)
-        /*
-        async function callRealAPI(prompt, duration, resolution) {
-            const response = await fetch('http://localhost:8000/generate_video', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    prompt: prompt,
-                    duration: parseInt(duration),
-                    resolution: resolution
-                })
-            });
-            
-            if (!response.ok) {
-                throw new Error(`API Error: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            return data.video_url;
-        }
-        */
-
-        function showVideoResult(videoUrl, prompt) {
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `
-                <div class="result success">
-                    <h3>✅ Video Generated Successfully!</h3>
-                    <p><strong>Your prompt:</strong> "${prompt.substring(0, 100)}${prompt.length > 100 ? '...' : ''}"</p>
-                    <div class="video-preview">
-                        <video controls autoplay loop>
-                            <source src="${videoUrl}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div style="margin-top: 15px;">
-                            <a href="${videoUrl}" download="generated_video_${Date.now()}.mp4" 
-                               style="background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; display: inline-block; margin: 5px;">
-                                📥 Download Video
-                            </a>
-                            <button onclick="regenerateWithSamePrompt()" 
-                                    style="background: #667eea; width: auto; padding: 10px 20px; margin: 5px;">
-                                🔄 Generate Different Version
-                            </button>
+                <div class="form-group">
+                    <label>🎯 Quick Templates</label>
+                    <div class="template-grid">
+                        <div class="template-item" data-prompt="A dancing banana character, breakdancing, colorful party background, disco lights, cartoon style, energetic motion">
+                            <div class="template-title">🍌 Banana Dance Clip</div>
+                            <div class="template-desc">Fun banana character dancing - perfect for memes</div>
+                        </div>
+                        <div class="template-item" data-prompt="Epic YouTube intro with glowing neon text 'WELCOME', dynamic camera movement, cinematic lighting, particles">
+                            <div class="template-title">🎥 YouTube Channel Intro</div>
+                            <div class="template-desc">Professional channel intro animation</div>
+                        </div>
+                        <div class="template-item" data-prompt="Music video intro, pulsing neon rings, bass drop animation, purple and cyan colors, EDM style">
+                            <div class="template-title">🎵 EDM Music Intro</div>
+                            <div class="template-desc">Electronic music video opener</div>
                         </div>
                     </div>
                 </div>
-            `;
-            
-            // Store last prompt for regeneration
-            localStorage.setItem('lastPrompt', prompt);
-        }
 
-        function showResult(type, message) {
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `
-                <div class="result ${type}">
-                    <h3>${type === 'success' ? '✅ Success!' : '❌ Error'}</h3>
-                    <p>${message}</p>
+                <button class="generate-btn" onclick="generateVideo()">🚀 Generate Video</button>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="card">
+                <h2>📀 Your Generated Videos</h2>
+                <div id="videoGallery">
+                    <div style="text-align: center; color: #999; padding: 40px;">
+                        No videos yet. Generate your first video!
+                    </div>
                 </div>
-            `;
-        }
+            </div>
+        </div>
+    </div>
 
-        function regenerateWithSamePrompt() {
-            const lastPrompt = localStorage.getItem('lastPrompt');
-            if (lastPrompt) {
-                document.getElementById('prompt').value = lastPrompt;
-                generateVideo();
-            }
-        }
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">🎬 AI is creating your video...</div>
+        <div class="loading-text" style="font-size: 0.9em; margin-top: 10px;">This takes 20-40 seconds</div>
+    </div>
 
-        // Add keyboard shortcut (Ctrl+Enter to generate)
-        document.getElementById('prompt').addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                generateVideo();
-            }
+    <script>
+        let activeMode = 'text_to_video';
+        let pollingIntervals = {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadVideos();
+            
+            // Mode switching
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    activeMode = btn.dataset.mode;
+                    
+                    if (activeMode === 'text_to_video') {
+                        document.getElementById('prompt_group').style.display = 'block';
+                        document.getElementById('image_group').style.display = 'none';
+                    } else {
+                        document.getElementById('prompt_group').style.display = 'block';
+                        document.getElementById('image_group').style.display = 'block';
+                    }
+                });
+            });
+            
+            // Template clicks
+            document.querySelectorAll('.template-item').forEach(template => {
+                template.addEventListener('click', () => {
+                    const prompt = template.dataset.prompt;
+                    document.getElementById('prompt').value = prompt;
+                    showAlert('success', 'Template loaded! Customize and generate.', 2000);
+                });
+            });
         });
-    </script>
 
-    <!-- Backend setup instructions (copy this section if you need real API) -->
-    <div style="display: none;" id="backendCode">
-        <!-- 
-        ============================================
-        BACKEND SETUP FOR REAL MINIMAX API
-        ============================================
-        
-        Save this as `server.py` and run with: python server.py
-        
-        ```python
-        from flask import Flask, request, jsonify
-        from flask_cors import CORS
-        import requests
-        import os
-        
-        app = Flask(__name__)
-        CORS(app)
-        
-        MINIMAX_TOKEN = "your_token_here"
-        
-        @app.route('/generate_video', methods=['POST'])
-        def generate_video():
-            data = request.json
-            prompt = data.get('prompt')
-            duration = data.get('duration', 6)
-            resolution = data.get('resolution', '1080P')
+        async function generateVideo() {
+            const prompt = document.getElementById('prompt').value.trim();
+            const duration = parseInt(document.getElementById('duration').value);
+            const resolution = document.getElementById('resolution').value;
             
-            headers = {
-                "Authorization": f"Bearer {MINIMAX_TOKEN}",
-                "Content-Type": "application/json"
+            if (!prompt) {
+                showAlert('error', 'Please enter a prompt description');
+                return;
             }
             
-            payload = {
-                "model": "MiniMax-Hailuo-2.3",
-                "prompt": prompt,
-                "duration": duration,
-                "resolution": resolution
+            // Build request
+            const request = {
+                prompt: prompt,
+                duration: duration,
+                resolution: resolution,
+                mode: activeMode
+            };
+            
+            if (activeMode === 'image_to_video') {
+                const imageUrl = document.getElementById('image_url').value.trim();
+                if (!imageUrl) {
+                    showAlert('error', 'Please provide an image URL for image-to-video mode');
+                    return;
+                }
+                request.first_frame_image = imageUrl;
             }
             
-            response = requests.post(
-                "https://api.minimax.io/v1/video_generation",
-                json=payload,
-                headers=headers
-            )
+            // Show loading
+            document.getElementById('loadingOverlay').style.display = 'flex';
             
-            return jsonify(response.json())
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(request)
+                });
+                
+                const data = await response.json();
+                
+                if (data.task_id) {
+                    showAlert('success', 'Video generation started! Polling for completion...', 3000);
+                    startPolling(data.task_id);
+                } else {
+                    throw new Error('No task ID returned');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('error', `Failed to generate video: ${error.message}`);
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }
+        }
         
-        if __name__ == '__main__':
-            app.run(port=8000)
+        function startPolling(taskId) {
+            // Add to gallery as pending
+            addPendingVideo(taskId);
+            
+            // Poll every 5 seconds
+            const interval = setInterval(async () => {
+                try {
+                    const response = await fetch(`/api/status/${taskId}`);
+                    const status = await response.json();
+                    
+                    if (status.status === 'completed') {
+                        clearInterval(interval);
+                        document.getElementById('loadingOverlay').style.display = 'none';
+                        addCompletedVideo(taskId, status);
+                        showAlert('success', 'Video ready! Download it now.', 3000);
+                        loadVideos();
+                    } else if (status.status === 'failed') {
+                        clearInterval(interval);
+                        document.getElementById('loadingOverlay').style.display = 'none';
+                        showAlert('error', `Generation failed: ${status.error}`);
+                    }
+                    
+                } catch (error) {
+                    console.error('Polling error:', error);
+                }
+            }, 5000);
+            
+            pollingIntervals[taskId] = interval;
+        }
+        
+        function addPendingVideo(taskId) {
+            let videos = JSON.parse(localStorage.getItem('videos') || '[]');
+            videos.unshift({
+                id: taskId,
+                status: 'pending',
+                timestamp: new Date().toLocaleString(),
+                prompt: document.getElementById('prompt').value
+            });
+            localStorage.setItem('videos', JSON.stringify(videos));
+            loadVideos();
+        }
+        
+        function addCompletedVideo(taskId, status) {
+            let videos = JSON.parse(localStorage.getItem('videos') || '[]');
+            const index = videos.findIndex(v => v.id === taskId);
+            if (index !== -1) {
+                videos[index] = {
+                    ...videos[index],
+                    status: 'completed',
+                    file_id: status.file_id,
+                    video_url: status.video_url
+                };
+                localStorage.setItem('videos', JSON.stringify(videos));
+            }
+        }
+        
+        function loadVideos() {
+            const videos = JSON.parse(localStorage.getItem('videos') || '[]');
+            const gallery = document.getElementById('videoGallery');
+            
+            if (videos.length === 0) {
+                gallery.innerHTML = '<div style="text-align: center; color: #999; padding: 40px;">No videos yet. Generate your first video!</div>';
+                return;
+            }
+            
+            gallery.innerHTML = videos.map(video => `
+                <div class="video-item">
+                    ${video.status === 'pending' ? `
+                        <div style="text-align: center; padding: 40px;">
+                            <div class="spinner" style="width: 40px; height: 40px; margin: 0 auto;"></div>
+                            <p style="margin-top: 10px;">Generating... This takes 20-40 seconds</p>
+                        </div>
+                    ` : `
+                        <div class="video-wrapper">
+                            <video controls>
+                                <source src="${video.video_url}" type="video/mp4">
+                                Your browser does not support video playback.
+                            </video>
+                        </div>
+                    `}
+                    <div class="video-info">
+                        <div class="video-prompt">
+                            <strong>${video.timestamp}</strong><br>
+                            ${video.prompt.substring(0, 150)}${video.prompt.length > 150 ? '...' : ''}
+                        </div>
+                        ${video.status === 'completed' ? `
+                            <button class="download-btn" onclick="downloadVideo('${video.file_id}')">
+                                💾 Download Video
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        async function downloadVideo(fileId) {
+            try {
+                showAlert('success', 'Starting download...', 2000);
+                window.open(`/api/download/${fileId}`, '_blank');
+            } catch (error) {
+                showAlert('error', 'Download failed. Please try again.');
+            }
+        }
+        
+        function showAlert(type, message, duration = 3000) {
+            const alertDiv = document.getElementById('alert');
+            alertDiv.className = `alert ${type}`;
+            alertDiv.innerHTML = message;
+            
+            setTimeout(() => {
+                alertDiv.className = 'alert';
+            }, duration);
+        }
+    </script>
+</body>
+</html>
